@@ -51,6 +51,42 @@ function sortByNameReverse(contacts) {
   displayAllContacts(sortByNameArray);
 }
 
+function sortByNumber(contacts) {
+  let contactTable = document.getElementById('contacts-table');
+  contactTable.getElementsByTagName("tbody")[0].innerHTML = contactTable.rows[0].innerHTML;  
+  let sortByNameArray = contacts.sort(function(a, b) {
+    return a.number.localeCompare(b.number);
+  })
+  displayAllContacts(sortByNameArray);
+}
+
+function sortByNumberReverse(contacts) {
+  let contactTable = document.getElementById('contacts-table');
+  contactTable.getElementsByTagName("tbody")[0].innerHTML = contactTable.rows[0].innerHTML;  
+  let sortByNameArray = contacts.sort(function(a, b) {
+    return b.number.localeCompare(a.number);
+  })
+  displayAllContacts(sortByNameArray);
+}
+
+function sortByEmail(contacts) {
+  let contactTable = document.getElementById('contacts-table');
+  contactTable.getElementsByTagName("tbody")[0].innerHTML = contactTable.rows[0].innerHTML;  
+  let sortByNameArray = contacts.sort(function(a, b) {
+    return a.email.localeCompare(b.email);
+  })
+  displayAllContacts(sortByNameArray);
+}
+
+function sortByEmailReverse(contacts) {
+  let contactTable = document.getElementById('contacts-table');
+  contactTable.getElementsByTagName("tbody")[0].innerHTML = contactTable.rows[0].innerHTML;  
+  let sortByNameArray = contacts.sort(function(a, b) {
+    return b.email.localeCompare(a.email);
+  })
+  displayAllContacts(sortByNameArray);
+}
+
 function addRow(name, number, email) {
   let contactTable = document.getElementById('contacts-table');
   let newRow = contactTable.insertRow(-1);
@@ -79,8 +115,12 @@ let contactNumber = document.getElementById('addform__number-input');
 let addContactButton = document.getElementById('addform__add-contact-button');
 
 const sortByNameTitle = document.getElementById('sort-by-name-button');
+const sortByNumberTitle = document.getElementById('sort-by-number-button');
+const sortByEmailTitle = document.getElementById('sort-by-email-button');
 
 let alphabetize = true;
+let numberOrder = true;
+let emailOrder = true;
 
 addContactButton.addEventListener('click', function(event) {
   event.preventDefault();
@@ -107,5 +147,27 @@ sortByNameTitle.addEventListener('click', function(event) {
   } else {
     sortByNameReverse(contacts);
     alphabetize = !alphabetize;
+  }
+})
+
+sortByNumberTitle.addEventListener('click', function(event) {
+  event.preventDefault();
+  if (numberOrder) {
+    sortByNumber(contacts);
+    numberOrder = !numberOrder;
+  } else {
+    sortByNumberReverse(contacts);
+    numberOrder = !numberOrder;
+  }
+})
+
+sortByEmailTitle.addEventListener('click', function(event) {
+  event.preventDefault();
+  if (emailOrder) {
+    sortByEmail(contacts);
+    emailOrder = !emailOrder;
+  } else {
+    sortByEmailReverse(contacts);
+    emailOrder = !emailOrder;
   }
 })
