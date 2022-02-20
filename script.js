@@ -4,6 +4,53 @@ let contacts = [{
   email: 'example@test.com'
 }];
 
+function clearAllChildren() {
+  let contactTable = document.getElementById('contacts-table');
+  while (contactTable.childNodes.length > 2) {
+    console.log("this is running");
+    contactTable.removeChild(contactTable.lastChild);
+  }
+}
+
+function displayAllContacts(contacts) {
+  clearAllChildren();
+  const allContacts = contacts.map((contact) => {
+    let contactTable = document.getElementById('contacts-table');
+    let newRow = contactTable.insertRow(-1);
+    let newNameCell = newRow.insertCell(0);
+    let newNumberCell = newRow.insertCell(1);
+    let newEmailCell = newRow.insertCell(2);
+    let newNameText = document.createTextNode(contact.name);
+    let newNumberText = document.createTextNode(contact.number);
+    let newEmailLink = document.createElement("a");
+    let newEmailText = document.createTextNode(contact.email);
+    newNameCell.appendChild(newNameText);
+    newNumberCell.appendChild(newNumberText);
+    newEmailCell.appendChild(newEmailLink);
+    newEmailLink.appendChild(newEmailText);
+    newEmailLink.href = `mailto:${contact.email}`;
+  })
+  return allContacts;
+}
+
+function sortByName(contacts) {
+  let contactTable = document.getElementById('contacts-table');
+  contactTable.getElementsByTagName("tbody")[0].innerHTML = contactTable.rows[0].innerHTML;  
+  let sortByNameArray = contacts.sort(function(a, b) {
+    return a.name.localeCompare(b.name);
+  })
+  displayAllContacts(sortByNameArray);
+}
+
+function sortByNameReverse(contacts) {
+  let contactTable = document.getElementById('contacts-table');
+  contactTable.getElementsByTagName("tbody")[0].innerHTML = contactTable.rows[0].innerHTML;  
+  let sortByNameArray = contacts.sort(function(a, b) {
+    return b.name.localeCompare(a.name);
+  })
+  displayAllContacts(sortByNameArray);
+}
+
 function addRow(name, number, email) {
   let contactTable = document.getElementById('contacts-table');
   let newRow = contactTable.insertRow(-1);
@@ -21,15 +68,19 @@ function addRow(name, number, email) {
   newEmailLink.href = `mailto:${email}`;
 }
 
-window.onload = addRow(contacts[0].name, contacts[0].number, contacts[0].email);
+window.onload = displayAllContacts(contacts);
 
-console.log(contacts);
+// console.log(contacts);
 
 let addContactForm = document.getElementsByClassName('main-container__addform');
 let contactName = document.getElementById('addform__name-input');
 let contactEmail = document.getElementById('addform__email-input');
 let contactNumber = document.getElementById('addform__number-input');
 let addContactButton = document.getElementById('addform__add-contact-button');
+
+const sortByNameTitle = document.getElementById('sort-by-name-button');
+
+let alphabetize = true;
 
 addContactButton.addEventListener('click', function(event) {
   event.preventDefault();
@@ -43,7 +94,18 @@ addContactButton.addEventListener('click', function(event) {
   contactName.value = '';
   contactNumber.value = '';
   contactEmail.value = '';
-  console.log(contacts);
+  // console.log(contacts);
   addRow(newContact.name, newContact.number, newContact.email);
+  }
+})
+
+sortByNameTitle.addEventListener('click', function(event) {
+  event.preventDefault();
+  if (alphabetize) {
+    sortByName(contacts);
+    alphabetize = !alphabetize;
+  } else {
+    sortByNameReverse(contacts);
+    alphabetize = !alphabetize;
   }
 })
