@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <title>Contact Manager App</title>
+</head>
+<body>
+  <div class="mainContainer">
+    <h1>Contact Manager App</h1>
+    <div>
+      <h3>Search</h3>
+      <form class="searchForm">
+        <input type="text" />
+        <button>Search</button>
+      </form>
+    </div>
+    <div>
+      <h3>Add Contact</h3>
+      <form class="addForm">
+        <label for="name">Name:</label>
+        <input type="text" id="nameInput" placeholder="Name" />
+        <label for="email">Email:</label>
+        <input type="email" id="emailInput" placeholder="Email" />
+        <label for="number">Number:</label>
+        <input type="text" id="numberInput" placeholder="Number" />
+        <button id="addContactButton" type="submit">Add</button>
+      </form>
+    </div>
+    <div id="contactsDiv">
+      <h3>Contacts</h3>
+      <table id="contactsTable">
+        <tr>
+          <th>Name</th>
+          <th>Number</th>
+          <th>Email</th>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <script type="text/javascript" src="./script.js"></script>
+</body>
+</html>
