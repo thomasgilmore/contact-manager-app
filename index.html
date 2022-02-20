@@ -8,30 +8,30 @@
   <title>Contact Manager App</title>
 </head>
 <body>
-  <div class="mainContainer">
+  <div class="main-container">
     <h1>Contact Manager App</h1>
     <div>
       <h3>Search</h3>
-      <form class="searchForm">
+      <form class="main-container__searchform">
         <input type="text" />
         <button>Search</button>
       </form>
     </div>
     <div>
       <h3>Add Contact</h3>
-      <form class="addForm">
+      <form class="main-container__addform">
         <label for="name">Name:</label>
-        <input type="text" id="nameInput" placeholder="Name" />
+        <input type="text" id="addform__name-input" placeholder="Name" />
         <label for="email">Email:</label>
-        <input type="email" id="emailInput" placeholder="Email" />
+        <input type="email" id="addform__email-input" placeholder="Email" />
         <label for="number">Number:</label>
-        <input type="text" id="numberInput" placeholder="Number" />
-        <button id="addContactButton" type="submit">Add</button>
+        <input type="text" id="addform__number-input" placeholder="Number" />
+        <button id="addform__add-contact-button" type="submit">Add</button>
       </form>
     </div>
-    <div id="contactsDiv">
+    <div id="contacts-div">
       <h3>Contacts</h3>
-      <table id="contactsTable">
+      <table id="contacts-table">
         <tr>
           <th>Name</th>
           <th>Number</th>

@@ -5,7 +5,7 @@ let contacts = [{
 }];
 
 function addRow(name, number, email) {
-  let contactTable = document.getElementById('contactsTable');
+  let contactTable = document.getElementById('contacts-table');
   let newRow = contactTable.insertRow(-1);
   let newNameCell = newRow.insertCell(0);
   let newNumberCell = newRow.insertCell(1);
@@ -21,15 +21,15 @@ function addRow(name, number, email) {
   newEmailLink.href = `mailto:${email}`;
 }
 
-addRow(contacts[0].name, contacts[0].number, contacts[0].email);
+window.onload = addRow(contacts[0].name, contacts[0].number, contacts[0].email);
 
 console.log(contacts);
 
-let addContactForm = document.getElementsByClassName('addForm');
-let contactName = document.getElementById('nameInput');
-let contactEmail = document.getElementById('emailInput');
-let contactNumber = document.getElementById('numberInput');
-let addContactButton = document.getElementById('addContactButton');
+let addContactForm = document.getElementsByClassName('main-container__addform');
+let contactName = document.getElementById('addform__name-input');
+let contactEmail = document.getElementById('addform__email-input');
+let contactNumber = document.getElementById('addform__number-input');
+let addContactButton = document.getElementById('addform__add-contact-button');
 
 addContactButton.addEventListener('click', function(event) {
   event.preventDefault();
