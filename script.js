@@ -12,10 +12,13 @@ function addRow(name, number, email) {
   let newEmailCell = newRow.insertCell(2);
   let newNameText = document.createTextNode(name);
   let newNumberText = document.createTextNode(number);
+  let newEmailLink = document.createElement("a");
   let newEmailText = document.createTextNode(email);
   newNameCell.appendChild(newNameText);
   newNumberCell.appendChild(newNumberText);
-  newEmailCell.appendChild(newEmailText);
+  newEmailCell.appendChild(newEmailLink);
+  newEmailLink.appendChild(newEmailText);
+  newEmailLink.href = `mailto:${email}`;
 }
 
 addRow(contacts[0].name, contacts[0].number, contacts[0].email);
