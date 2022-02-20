@@ -33,7 +33,7 @@ let addContactButton = document.getElementById('addContactButton');
 
 addContactButton.addEventListener('click', function(event) {
   event.preventDefault();
-  if (contactName.value.length > 0 && contactNumber.value.length > 9 && contactEmail.value.length > 0) {
+  if (contactName.value.length > 0 && contactNumber.value.length > 9 || contactEmail.value.length > 0) {
   let newContact = {
     name: contactName.value,
     number: contactNumber.value,
