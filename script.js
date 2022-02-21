@@ -4,12 +4,32 @@ let contacts = [{
   email: 'example@test.com'
 }];
 
+let addContactForm = document.getElementsByClassName('main-container__addform');
+let contactName = document.getElementById('addform__name-input');
+let contactEmail = document.getElementById('addform__email-input');
+let contactNumber = document.getElementById('addform__number-input');
+let addContactButton = document.getElementById('addform__add-contact-button');
+
+let searchForm = document.getElementById('main-container__search-form');
+let searchFormInput = document.getElementById('search-form__input');
+let searchFormButton = document.getElementById('search-form__search-button');
+
+const sortByNameTitle = document.getElementById('sort-by-name-button');
+const sortByNumberTitle = document.getElementById('sort-by-number-button');
+const sortByEmailTitle = document.getElementById('sort-by-email-button');
+
+let alphabetize = true;
+let numberOrder = true;
+let emailOrder = true;
+
 function clearAllChildren() {
   let contactTable = document.getElementById('contacts-table');
-  while (contactTable.childNodes.length > 2) {
-    console.log("this is running");
-    contactTable.removeChild(contactTable.lastChild);
-  }
+  contactTable.getElementsByTagName("tbody")[0].innerHTML = contactTable.rows[0].innerHTML;
+  // let contactTable = document.getElementById('contacts-table');
+  // while (contactTable.childNodes.length > 2) {
+  //   console.log("this is running");
+  //   contactTable.removeChild(contactTable.lastChild);
+  // }
 }
 
 function displayAllContacts(contacts) {
@@ -34,8 +54,7 @@ function displayAllContacts(contacts) {
 }
 
 function sortByName(contacts) {
-  let contactTable = document.getElementById('contacts-table');
-  contactTable.getElementsByTagName("tbody")[0].innerHTML = contactTable.rows[0].innerHTML;  
+  clearAllChildren();
   let sortByNameArray = contacts.sort(function(a, b) {
     return a.name.localeCompare(b.name);
   })
@@ -43,8 +62,7 @@ function sortByName(contacts) {
 }
 
 function sortByNameReverse(contacts) {
-  let contactTable = document.getElementById('contacts-table');
-  contactTable.getElementsByTagName("tbody")[0].innerHTML = contactTable.rows[0].innerHTML;  
+  clearAllChildren();
   let sortByNameArray = contacts.sort(function(a, b) {
     return b.name.localeCompare(a.name);
   })
@@ -52,8 +70,7 @@ function sortByNameReverse(contacts) {
 }
 
 function sortByNumber(contacts) {
-  let contactTable = document.getElementById('contacts-table');
-  contactTable.getElementsByTagName("tbody")[0].innerHTML = contactTable.rows[0].innerHTML;  
+  clearAllChildren(); 
   let sortByNameArray = contacts.sort(function(a, b) {
     return a.number.localeCompare(b.number);
   })
@@ -61,8 +78,7 @@ function sortByNumber(contacts) {
 }
 
 function sortByNumberReverse(contacts) {
-  let contactTable = document.getElementById('contacts-table');
-  contactTable.getElementsByTagName("tbody")[0].innerHTML = contactTable.rows[0].innerHTML;  
+  clearAllChildren();  
   let sortByNameArray = contacts.sort(function(a, b) {
     return b.number.localeCompare(a.number);
   })
@@ -70,8 +86,7 @@ function sortByNumberReverse(contacts) {
 }
 
 function sortByEmail(contacts) {
-  let contactTable = document.getElementById('contacts-table');
-  contactTable.getElementsByTagName("tbody")[0].innerHTML = contactTable.rows[0].innerHTML;  
+  clearAllChildren();  
   let sortByNameArray = contacts.sort(function(a, b) {
     return a.email.localeCompare(b.email);
   })
@@ -79,8 +94,7 @@ function sortByEmail(contacts) {
 }
 
 function sortByEmailReverse(contacts) {
-  let contactTable = document.getElementById('contacts-table');
-  contactTable.getElementsByTagName("tbody")[0].innerHTML = contactTable.rows[0].innerHTML;  
+  clearAllChildren(); 
   let sortByNameArray = contacts.sort(function(a, b) {
     return b.email.localeCompare(a.email);
   })
@@ -106,21 +120,26 @@ function addRow(name, number, email) {
 
 window.onload = displayAllContacts(contacts);
 
+function searchContacts(contacts) {
+  const filteredContacts = contacts.filter(contact =>{
+    return contact.name.toLowerCase().includes(searchFormInput.value.toString().toLowerCase());
+  })
+  searchFormInput.value = '';
+  clearAllChildren();
+  displayAllContacts(filteredContacts);
+}
+
 // console.log(contacts);
 
-let addContactForm = document.getElementsByClassName('main-container__addform');
-let contactName = document.getElementById('addform__name-input');
-let contactEmail = document.getElementById('addform__email-input');
-let contactNumber = document.getElementById('addform__number-input');
-let addContactButton = document.getElementById('addform__add-contact-button');
-
-const sortByNameTitle = document.getElementById('sort-by-name-button');
-const sortByNumberTitle = document.getElementById('sort-by-number-button');
-const sortByEmailTitle = document.getElementById('sort-by-email-button');
-
-let alphabetize = true;
-let numberOrder = true;
-let emailOrder = true;
+searchFormButton.addEventListener('click', function(event) {
+  event.preventDefault();
+  if (searchFormInput.value.length > 0) {
+    searchContacts(contacts);
+  } else {
+    clearAllChildren();
+    displayAllContacts(contacts);
+  }
+})
 
 addContactButton.addEventListener('click', function(event) {
   event.preventDefault();
