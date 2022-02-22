@@ -147,20 +147,16 @@ function addRow(name, number, email, id) {
 window.onload = displayAllContacts(contacts);
 
 function searchContacts(contacts) {
-  let filteredContacts = [];
-  const filteredNameContacts = contacts.filter(contact =>{
-    return contact.name.toLowerCase().includes(searchFormInput.value.toString().toLowerCase())
+  let filteredContacts = contacts;
+  let searchValue = searchFormInput.value.toString().toLowerCase();
+  filteredContacts = filteredContacts.filter((contact) => {
+    return ['name', 'number', 'email'].some((key) => {
+      return contact[key].toString().toLowerCase().includes(searchValue);
+    })
   })
-  // const filteredNumberContacts = contacts.filter(contact =>{
-  //   return contact.number.includes(searchFormInput.value.toString());
-  // })
-  // const filteredEmailContacts = contacts.filter(contact =>{
-  //   return contact.email.toLowerCase().includes(searchFormInput.value.toString().toLowerCase());
-  // })
   searchFormInput.value = '';
   clearAllChildren();
-  // filteredContacts = [...filteredNameContacts, ...filteredNumberContacts, ...filteredEmailContacts];
-  displayAllContacts(filteredNameContacts);
+  displayAllContacts(filteredContacts);
 }
 
 // console.log(contacts);
