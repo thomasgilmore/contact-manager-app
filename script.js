@@ -32,11 +32,14 @@ function clearAllChildren() {
 
 function deleteContact(event) {
   event.preventDefault();
-  let contactsToKeep = contacts.filter(function(contact) {
-    return contact.id != event.target.id;
-  });
-  contacts = contactsToKeep;
-  displayAllContacts(contactsToKeep);
+  let isDeleted = confirm("Are you sure you want to delete this contact?");
+  if (isDeleted) {
+    let contactsToKeep = contacts.filter(function(contact) {
+      return contact.id != event.target.id;
+    });
+    contacts = contactsToKeep;
+    displayAllContacts(contactsToKeep);
+  }
 }
 
 function displayAllContacts(contacts) {
