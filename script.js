@@ -155,12 +155,11 @@ function searchContacts(contacts) {
 }
 
 function ValidateEmail(email) {
- if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))
-  {
-    return (true)
-  }
-    alert("You have entered an invalid email address!");
-    return (false)
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) {
+    return (true);
+  } 
+  alert("You have entered an invalid email address!");
+  return (false);
 }
 
 searchFormButton.addEventListener('click', function(event) {
