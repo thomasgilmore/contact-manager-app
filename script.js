@@ -28,11 +28,6 @@ let emailOrder = true;
 function clearAllChildren() {
   let contactTable = document.getElementById('contacts-table');
   contactTable.getElementsByTagName("tbody")[0].innerHTML = contactTable.rows[0].innerHTML;
-  // let contactTable = document.getElementById('contacts-table');
-  // while (contactTable.childNodes.length > 2) {
-  //   console.log("this is running");
-  //   contactTable.removeChild(contactTable.lastChild);
-  // }
 }
 
 function deleteContact(event) {
@@ -159,7 +154,14 @@ function searchContacts(contacts) {
   displayAllContacts(filteredContacts);
 }
 
-// console.log(contacts);
+function ValidateEmail(email) {
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))
+  {
+    return (true)
+  }
+    alert("You have entered an invalid email address!");
+    return (false)
+}
 
 searchFormButton.addEventListener('click', function(event) {
   event.preventDefault();
@@ -174,6 +176,7 @@ searchFormButton.addEventListener('click', function(event) {
 addContactButton.addEventListener('click', function(event) {
   event.preventDefault();
   if (contactName.value.length > 0 && contactNumber.value.length > 9 || contactEmail.value.length > 0) {
+    if (ValidateEmail(contactEmail)) {
   let newContact = {
     id: idNumber,
     name: contactName.value,
@@ -185,8 +188,14 @@ addContactButton.addEventListener('click', function(event) {
   contactName.value = '';
   contactNumber.value = '';
   contactEmail.value = '';
-  // console.log(contacts);
   addRow(newContact.name, newContact.number, newContact.email, newContact.id);
+} else {
+  ValidateEmail(contactEmail);
+}
+  } else if (contactName.value.length < 1) {
+    alert("You have to enter a name.");
+  } else if (contactNumber.value.length < 10 && contactEmail.value.length < 1) {
+    alert("You have to enter either a phone number or a valid email address.");
   }
 })
 
