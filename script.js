@@ -165,6 +165,14 @@ function ValidateEmail(email) {
   return (false);
 }
 
+function ValidateNumber(number) {
+  if (/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(number.value)) {
+    return (true);
+  }
+  alert("You have entered an invalid phone number!");
+  return (false);
+}
+
 searchFormButton.addEventListener('click', function(event) {
   event.preventDefault();
   if (searchFormInput.value.length > 0) {
@@ -177,27 +185,44 @@ searchFormButton.addEventListener('click', function(event) {
 
 addContactButton.addEventListener('click', function(event) {
   event.preventDefault();
-  if (contactName.value.length > 0 && contactNumber.value.length > 9 || contactEmail.value.length > 0) {
-    if (ValidateEmail(contactEmail)) {
-  let newContact = {
-    id: idNumber,
-    name: contactName.value,
-    number: contactNumber.value,
-    email: contactEmail.value
-  }
-  contacts.push(newContact);
-  idNumber++;
-  contactName.value = '';
-  contactNumber.value = '';
-  contactEmail.value = '';
-  addRow(newContact.name, newContact.number, newContact.email, newContact.id);
-} else {
-  ValidateEmail(contactEmail);
-}
-  } else if (contactName.value.length < 1) {
+  if (contactName.value.length < 1) {
     alert("You have to enter a name.");
   } else if (contactNumber.value.length < 10 && contactEmail.value.length < 1) {
     alert("You have to enter either a phone number or a valid email address.");
+  } else if (contactName.value.length > 0 && contactNumber.value.length > 9) {
+    if (ValidateNumber(contactNumber)) {
+      let newContact = {
+        id: idNumber,
+        name: contactName.value,
+        number: contactNumber.value,
+        email: contactEmail.value
+      }
+      contacts.push(newContact);
+      idNumber++;
+      contactName.value = '';
+      contactNumber.value = '';
+      contactEmail.value = '';
+      addRow(newContact.name, newContact.number, newContact.email, newContact.id);
+    } else {
+      ValidateNumber(contactNumber);
+    }
+  } else if (contactName.value.length > 0 && contactEmail.value.length > 0) {
+    if (ValidateEmail(contactEmail)) {
+      let newContact = {
+        id: idNumber,
+        name: contactName.value,
+        number: contactNumber.value,
+        email: contactEmail.value
+      }
+      contacts.push(newContact);
+      idNumber++;
+      contactName.value = '';
+      contactNumber.value = '';
+      contactEmail.value = '';
+      addRow(newContact.name, newContact.number, newContact.email, newContact.id);
+    } else {
+      ValidateEmail(contactEmail)
+    }
   }
 })
 
