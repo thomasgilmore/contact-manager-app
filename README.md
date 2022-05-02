@@ -4,5 +4,5 @@
 
 * Creates input to search/sort contacts by user input (name, phone number, etc.)
 
-__Live Link:__ <a href =""></a>
+__Live Link:__ <a href ="https://thomasgilmore95.github.io/contact-manager-app/">thomasgilmore95.github.io/contact-manager-app/</a>
 
